@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaderboard</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8209420378409026"
+     crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/scripts/backend.js"></script>
+</head>
+<body>
+    <h1>RoGxUNREALyt</h1>
+
+    <header class="leaderboard-header">
+        <h1>📢 Join the Leaderboard!</h1>
+        <p>
+            <a href="/fill_form" class="form-link">
+                Click here to access the registration form
+            </a>
+        </p>
+    </header>
+
+    <div class="navbar">
+        <div class="brand">BGMI MOST FINISH TOURNAMENT</div>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/pages/leaderboard.html">Leaderboard</a>
+            <a href="/pages/matchdata.html" class="active">Match Data</a>
+            <a href="/pages/players.html">Players</a>
+            <a href="/pages/fill_form.html">Form</a>
+            
+            <!-- Dropdown for additional links -->
+            <!-- <div class="dropdown">
+                <a href="#">More ▼</a>
+                <div class="dropdown-content">
+                    <a href="#">Settings</a>
+                    <a href="#">Profile</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="filter_options">
+        <div class="search">
+            <label for="search_txt">Search:</label>
+            <input type="text" id="search_txt" placeholder="Enter PlayerID or In-Game Name" oninput="searchMatchData()"><br>
+            <!--<button type="button" class="button button-primary" id="btn_search" onclick="searchLeaderboard()">Search</button> -->
+        </div>
+        <div class="dropdowns">
+            <div class="dropdown">
+                <label for="season">Season:</label>
+                <select id="season" name="season">
+                    <option value="" selected>Select Season</option>
+                    <!-- Add more seasons as needed -->
+                </select>
+            </div>
+            <div class="dropdown">
+                <label for="day">Day:</label>
+                <select id="day" name="day">
+                    <option value="" selected>Select Day</option>
+                    <!-- Add more days as needed -->
+                </select>                   
+            </div>
+            <div class="dropdown">
+                <label for="match">Match:</label>
+                <select id="match" name="match">
+                    <option value="" selected>Select Match</option>
+                    <!-- Add more matches as needed -->
+                </select>
+            </div>
+
+            <button type="button" class="button button-primary" id="btn_refresh" onclick="RefreshMatchData()">Refresh</button>
+        </div>
+    </div>
+
+    <h2>All Match Data</h2>
+    <span class="page-desc">
+        Please use filters to check Match Data of specific Season, Day or Match. <br>
+        You can also search for a Player using PlayerID/InGame Name.
+    </span>
+    <table>
+        <thead>
+            <tr>
+                <th>Match No</th>
+                <th>Season</th>
+                <th>Date</th>
+                <th>Match Id</th>
+                <th>Player No</th>
+                <th>Player ID</th>
+                <th>Player In-Game Name</th>
+                <th>Finishes*</th>
+                <th>Assists*</th>
+                <th>Revives*</th>
+            </tr>
+        </thead>
+        <tbody id="allMatchDataTable">
+            <!-- Rows will be populated by JavaScript -->
+        </tbody>
+    </table>
+
+    <div class="paginationControls">
+
+        <label for="resultsPerPage">Results per page:</label>
+        <select id="resultsPerPage" onchange="setResultsPerPage()">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+
+        <div id="paginationContainer"></div>
+            
+    </div>
+
+    <span id="note">* - Please Note: data collected for these (*) columns are from POST-Match statistics.
+        This is to ensure that this data comes from a legit source. <br>
+        Data for Assists and Revives will be used in context of Assists and Revives only!!
+    </span>
+
+    <footer class="footer">
+        <p>&copy; 2024 RoGxUNREALyt. All Rights Reserved.</p>
+        <div class="social-links">
+            <a href="https://www.youtube.com/@RoGxUNREALyt" target="_blank">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube">
+            </a>
+            <a href="https://www.instagram.com/rogxunreal_yt" target="_blank">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram">
+            </a>
+            <a href="https://www.facebook.com/share/wqst5CNqfuHqnaR9/" target="_blank">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook">
+            </a>
+            <a href="https://discord.gg/fbjP7St7WS" target="_blank">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord">
+            </a>
+        </div>
+    </footer>
+
+    <script src="/scripts/common_js.js"></script>
+    <script src="/scripts/matchdata.js"></script>
+</body>
+</html>
