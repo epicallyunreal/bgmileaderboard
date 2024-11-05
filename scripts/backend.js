@@ -82,37 +82,6 @@ loadData();
 
 
 // CORE FUNCTIONS acting as endpoints for the API calls
-// example 
-function mockFetchLeaderboard(season, day, matchNo) {
-    // Simulated data
-    const simulatedData = [
-        { player: "Player1", score: 10, season, day, match_no: matchNo },
-        { player: "Player2", score: 20, season, day, match_no: matchNo },
-    ];
-
-    // Return a promise that resolves to the simulated data
-    return Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve(simulatedData),
-    });
-}
-
-mockFetchLeaderboard(season, day, matchNo)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(leaderboard => {
-        console.log('Fetched leaderboard:', leaderboard);
-        // Here you can manipulate the DOM or call your display function
-        MainTableData = leaderboard;
-        filteredData = MainTableData;
-        displayTableData();
-    })
-    .catch(error => console.error('Error fetching leaderboard:', error));
-
 // COMMON FUNCTIONS
 function Common_Seasons() {
     const seasonMatchMap = {};
