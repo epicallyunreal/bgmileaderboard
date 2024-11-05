@@ -9,7 +9,10 @@ function RefreshMatchData() {
     const selectedDay = document.getElementById('day').value;
     const selectedMatch = document.getElementById('match').value;
     loadMatchData(selectedSeason, selectedDay, selectedMatch);
-    searchMatchData();
+    const searchText = document.getElementById('search_txt').value.toLowerCase();
+    if (searchText != '') {
+        searchMatchData();
+    }
 }
 
 function loadMatchData(season, day = '', matchNo = '') {

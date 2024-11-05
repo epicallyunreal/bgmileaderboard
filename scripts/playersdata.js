@@ -6,7 +6,10 @@ window.onload = function() {
 
 function RefreshPlayerData() {
     loadPlayerData();
-    searchPlayerData();
+    const searchText = document.getElementById('search_txt').value.toLowerCase();
+    if (searchText != '') {
+        searchPlayerData();
+    } 
 }
 
 function loadPlayerData() {

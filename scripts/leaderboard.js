@@ -9,7 +9,10 @@ function RefreshLeaderboard() {
     const selectedDay = document.getElementById('day').value;
     const selectedMatch = document.getElementById('match').value;
     loadLeaderboard(selectedSeason, selectedDay, selectedMatch);
-    searchLeaderboard();
+    const searchText = document.getElementById('search_txt').value.toLowerCase();
+    if (searchText != '') {
+        searchLeaderboard();
+    } 
 }
 
 function loadLeaderboard(season, day = '', matchNo = '') {
