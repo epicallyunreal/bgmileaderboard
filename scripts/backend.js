@@ -1,7 +1,7 @@
 // file path
-const p2fPlayersData = '/data/playersdata.json';
-const p2fMatchData = '/data/matchdata.json';
-const p2fPlayerGameData = '/data/playergamedata.json';
+const p2fPlayersData = '../data/playersdata.json';
+const p2fMatchData = '../data/matchdata.json';
+const p2fPlayerGameData = '../data/playergamedata.json';
 
 // Update on FIle Updtes
 const PD_VERSION = '0.0';
