@@ -3,12 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Leaderboard</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8209420378409026"
-     crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/fireworks-js/dist/fireworks.js"></script> -->
+
+    <script>
+        function launchConfetti() {
+            confetti({
+                particleCount: 500,
+                spread: 360,
+                origin: { y: 0.5 }
+            });
+        }
+
+        // Optional: add multiple bursts for more impact
+        function partyAnimation() {
+            const duration = 2 * 1000; 
+            const animationEnd = Date.now() + duration;
+            const colors = ['#bb0000', '#ffffff', '#FFD700', '#C0C0C0', '#1E90FF', '#32CD32', '#800080', '#FF69B4', '#FFA500', '#40E0D0', '#FFFF00', '#FF00FF'];
+
+            (function frame() {
+                confetti({
+                    particleCount: 7,
+                    angle: 60,
+                    spread: 80,
+                    origin: { x: 0.0 },
+                    colors: colors
+                });
+                confetti({
+                    particleCount: 7,
+                    angle: 120,
+                    spread: 80,
+                    origin: { x: 1 },
+                    colors: colors
+                });
+
+                if (Date.now() < animationEnd) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+        document.addEventListener('DOMContentLoaded', (event) => {
+            partyAnimation();
+            launchConfetti();
+        });
+    </script>
     <script src="../scripts/backend.js"></script>
 </head>
 <body>
@@ -17,7 +59,7 @@
     <header class="leaderboard-header">
         <h1>📢 Join the Leaderboard!</h1>
         <p>
-            <a href="./fill_form" class="form-link">
+            <a href="./fill_form.html" class="form-link">
                 Click here to access the registration form
             </a>
         </p>
@@ -29,7 +71,7 @@
             <a href="../index.html">Home</a>
             <a href="./leaderboard.html" class="active">Leaderboard</a>
             <a href="./matchdata.html">Match Data</a>
-            <a href="./playersdata.html">Players</a>
+            <a href="./players.html">Players</a>
             <a href="./fill_form.html">Form</a>
             
             <!-- Dropdown for additional links -->
@@ -82,7 +124,7 @@
         Please use filters to check leaderboard of specific Season, Day or Match. <br>
         Or simply search you Name/Player Id in the Leaderboard.
     </span>
-    <table>
+    <table id="mainTable">
         <thead>
             <tr>
                 <th>Rank</th>
@@ -113,7 +155,13 @@
             
     </div>
 
-    <span id="note">* - Please Note: data collected for these (*) columns are from POST-Match statistics.
+    <div id="toast" class="toast"></div>
+    <!-- <div id="fireworks-container"></div> -->
+
+    <span id="note">
+        <b>Players marked in Red are not registered yet!!</b>
+        <br><br>
+        * - Please Note: data collected for these (*) columns are from POST-Match statistics.
         This is to ensure that this data comes from a legit source. <br>
         Data for Assists and Revives will be used in context of Assists and Revives only!!
     </span>
@@ -136,6 +184,19 @@
         </div>
     </footer>
 
+    <!-- <script>
+        window.onload = function() {
+            const container = document.getElementById('fireworks-container');
+            console.log(container); 
+            const fireworks = new Fireworks({
+                target: container,
+                maxRockets: 5,
+                rocketSpawnInterval: 100,
+                numParticles: 50
+            });
+            fireworks.start();
+        };
+    </script> -->
     <script src="../scripts/common_js.js"></script>
     <script src="../scripts/leaderboard.js"></script>
 </body>

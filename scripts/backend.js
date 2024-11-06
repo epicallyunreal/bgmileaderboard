@@ -4,9 +4,9 @@ const p2fMatchData = '../data/matchdata.json';
 const p2fPlayerGameData = '../data/playergamedata.json';
 
 // Update on FIle Updtes
-const PD_VERSION = '0.0';
-const MD_VERSION = '0.0';
-const PGD_VERSION = '0.0';
+const PD_VERSION = '1.1';
+const MD_VERSION = '1.1';
+const PGD_VERSION = '1.1';
 
 // global vars
 let playersData = [];
@@ -162,7 +162,7 @@ function Leaderboard_Refresh(season, day, match_no) {
         const totalAssists = relevantGameData.reduce((sum, data) => sum + data.assists, 0);
         const totalRevives = relevantGameData.reduce((sum, data) => sum + data.revives, 0);
 
-        if (totalFinishes > 0 || totalAssists > 0 || totalRevives > 0) {
+        if (relevantGameData.length > 0) {
             return {
                 player_no: player.player_no,
                 player_id: player.player_id,
@@ -178,7 +178,19 @@ function Leaderboard_Refresh(season, day, match_no) {
     const filteredLeaderboard = leaderboard.filter(player => player !== undefined);
 
     // Sort by total finishes in descending order and limit to 500
-    const sortedLeaderboard = filteredLeaderboard.sort((a, b) => b.total_finishes - a.total_finishes).slice(0, 500);
+    const sortedLeaderboard = filteredLeaderboard.sort((a, b) => {
+        if (b.total_finishes !== a.total_finishes) {
+            return b.total_finishes - a.total_finishes;
+        }
+        if (b.total_assists !== a.total_assists) {
+            return b.total_assists - a.total_assists;
+        }
+        return b.total_revives - a.total_revives;
+    }).slice(0, 500);
+
+    sortedLeaderboard.forEach((player, index) => {
+        player.rank = index + 1;
+    });
 
     return Promise.resolve({
         ok: true,

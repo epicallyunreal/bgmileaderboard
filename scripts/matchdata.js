@@ -5,14 +5,21 @@ window.onload = function() {
 };
 
 function RefreshMatchData() {
-    const selectedSeason = document.getElementById('season').value;
-    const selectedDay = document.getElementById('day').value;
-    const selectedMatch = document.getElementById('match').value;
-    loadMatchData(selectedSeason, selectedDay, selectedMatch);
+    const selectedSeason = document.getElementById('season');
+    const selectedDay = document.getElementById('day');
+    const selectedMatch = document.getElementById('match');
+    loadMatchData(selectedSeason.value, selectedDay.value, selectedMatch.value);
     const searchText = document.getElementById('search_txt').value.toLowerCase();
     if (searchText != '') {
         searchMatchData();
     }
+
+    if (selectedSeason.value != "") selectedSeason.classList.add("dropdown-filter");
+        else selectedSeason.classList.remove("dropdown-filter");
+    if (selectedDay.value != "") selectedDay.classList.add("dropdown-filter");
+        else selectedDay.classList.remove("dropdown-filter");
+    if (selectedMatch.value != "") selectedMatch.classList.add("dropdown-filter");
+        else selectedMatch.classList.remove("dropdown-filter");
 }
 
 function loadMatchData(season, day = '', matchNo = '') {
@@ -22,6 +29,7 @@ function loadMatchData(season, day = '', matchNo = '') {
             MainTableData = matchdata;
             filteredData = MainTableData;
             displayTableData();
+            showToast("Match Data Refreshed!!");
         });
 }
 
@@ -78,6 +86,9 @@ function displayTableData() {
             <td>${item.assists}</td>
             <td>${item.revives}</td>
         `;
+        if(item.player_id == '') {
+            row.classList.add("unregistered");
+        }
         tbody.appendChild(row);
     });
 

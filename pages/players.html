@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Leaderboard</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8209420378409026"
-     crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
 
@@ -16,7 +14,7 @@
     <header class="leaderboard-header">
         <h1>📢 Join the Leaderboard!</h1>
         <p>
-            <a href="./fill_form" class="form-link">
+            <a href="./fill_form.html" class="form-link">
                 Click here to access the registration form
             </a>
         </p>
@@ -49,31 +47,6 @@
             <input type="text" id="search_txt" placeholder="Enter PlayerID or In-Game Name" oninput="searchPlayerData()"><br>
             <!--<button type="button" class="button button-primary" id="btn_search" onclick="searchLeaderboard()">Search</button> -->
         </div>
-        <!-- <div class="dropdowns">
-            <div class="dropdown">
-                <label for="season">Season:</label>
-                <select id="season" name="season">
-                    <option value="" selected>Select Season</option>
-                     Add more seasons as needed 
-                </select>
-            </div>
-            <div class="dropdown">
-                <label for="day">Day:</label>
-                <select id="day" name="day">
-                    <option value="" selected>Select Day</option>
-                     Add more days as needed 
-                </select>                   
-            </div>
-            <div class="dropdown">
-                <label for="match">Match:</label>
-                <select id="match" name="match">
-                    <option value="" selected>Select Match</option>
-                     Add more matches as needed 
-                </select>
-            </div>
-
-            <button type="button" class="button button-primary" id="btn_refresh" onclick="RefreshPlayerData()">Refresh</button>
-        </div> -->
     </div>
 
     <h2>All Players</h2>
@@ -86,11 +59,11 @@
             <tr>
                 <th>Player No</th>
                 <th>Player Id</th>
-                <th>Real Name</th>
+                <!-- <th>Real Name</th> -->
                 <th>Player In Game Name</th>
-                <th>Youtube Channel</th>
+                <!-- <th>Youtube Channel</th>
                 <th>Insta Name</th>
-                <th>Discord Name</th>
+                <th>Discord Name</th> -->
             </tr>
         </thead>
         <tbody id="playersDataTable">
@@ -111,6 +84,12 @@
         <div id="paginationContainer"></div>
             
     </div>
+
+    <div id="toast" class="toast"></div>
+
+    <span id="note">
+        <b>Players marked in Red are not registered yet!!</b>
+    </span>
 
     <footer class="footer">
         <p>&copy; 2024 RoGxUNREALyt. All Rights Reserved.</p>

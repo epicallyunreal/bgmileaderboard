@@ -1,6 +1,5 @@
 // Fetch leaderboard data on page load
 window.onload = function() {
-    fetchSeasons();
     RefreshPlayerData();
 };
 
@@ -19,7 +18,7 @@ function loadPlayerData() {
             MainTableData = data;
             filteredData = MainTableData;
             displayTableData();
-            displayPagination();
+            showToast("PlayerData Loaded!!");
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -50,8 +49,7 @@ function searchPlayerData() {
         alert('No players found matching your search criteria.'); // Alert if no data is present
     } else {
         currentPage = 1;
-        displayTableData(); // Display the filtered leaderboard
-        displayPagination();
+        displayTableData();
     }
 }
 
@@ -67,19 +65,33 @@ function displayTableData() {
     const end = start + resultsPerPage;
     const paginatedData = dataToDisplay.slice(start, end); // Get the current page's data
 
+    // paginatedData.forEach(item => {
+    //     const row = document.createElement('tr');
+    //     row.innerHTML = `
+    //         <td>${item.player_no}</td>
+    //         <td>${item.player_id}</td>
+    //         <td>${maskName(item.real_name)}</td>
+    //         <td>${item.player_in_game_name}</td>
+    //         <td>${maskName(item.youtube_channel)}</td>
+    //         <td>${maskName(item.insta_name)}</td>
+    //         <td>${maskName(item.discord_name)}</td>
+    //     `;
+    //     tbody.appendChild(row);
+    // });
+
     paginatedData.forEach(item => {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${item.player_no}</td>
             <td>${item.player_id}</td>
-            <td>${maskName(item.real_name)}</td>
             <td>${item.player_in_game_name}</td>
-            <td>${maskName(item.youtube_channel)}</td>
-            <td>${maskName(item.insta_name)}</td>
-            <td>${maskName(item.discord_name)}</td>
         `;
+        if(item.player_id == '') {
+            row.classList.add("unregistered");
+        }
         tbody.appendChild(row);
     });
+    displayPagination();
 
     if (paginatedData.length === 0) {
         alert('No players found matching your search criteria.');

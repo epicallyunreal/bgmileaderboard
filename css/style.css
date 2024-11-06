@@ -8,8 +8,10 @@
 /* Body styling */
 body {
     font-family: 'Rubik', cursive, Arial, Helvetica, sans-serif;
-    background-color: #1c1f24;  /* Dark background */
-    color: #cfd2d6;             /* Soft white text */
+    background-color: #1c1f24;
+    color: #cfd2d6;        
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .match_data {
@@ -175,7 +177,7 @@ th {
     color: #d3e0e9;
 }
 
-td {
+tr {
     background-color: #1f2328;
     color: #cfd2d6;
 }
@@ -209,8 +211,10 @@ td {
 }
 
 #note {
+    display: block;
     color: #ff5555;
     font-size: 12px;
+    margin: 8px 20px;
 }
 
 
@@ -321,6 +325,7 @@ td {
     padding: 8px; /* Padding inside the filter options */
     margin-bottom: 20px; /* Space below the filter options */
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .search, .dropdowns, .paginationControls{
@@ -365,7 +370,7 @@ td {
 }
 
 #paginationContainer button {
-    background-color: #007bff; /* Primary button color */
+    background-color: #4598f1; /* Primary button color */
     color: white; /* Button text color */
     border: none; /* Remove border */
     padding: 10px 15px; /* Padding for buttons */
@@ -377,12 +382,16 @@ td {
 }
 
 #paginationContainer button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #007bff; /* Darker shade on hover */
 }
 
 #paginationContainer button.active {
-    background-color: #0056b3; /* Active button color */
+    background-color: #004fa2; /* Active button color */
     font-weight: bold; /* Bold text for active page */
+}
+
+#paginationContainer button.active:hover {
+    background-color: #003164; /* Darker shade on hover */
 }
 
 #paginationContainer button[disabled] {
@@ -517,3 +526,58 @@ td {
     }
 }
 
+.unregistered {
+    background-color: #8d4545 !important;
+}
+
+.dropdown-filter {
+    border-color: #e86c4a;
+}
+
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin: 0 auto;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+
+.toast.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+/* #fireworks-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: transparent;
+} */

@@ -5,14 +5,21 @@ window.onload = function() {
 };
 
 function RefreshLeaderboard() {
-    const selectedSeason = document.getElementById('season').value;
-    const selectedDay = document.getElementById('day').value;
-    const selectedMatch = document.getElementById('match').value;
-    loadLeaderboard(selectedSeason, selectedDay, selectedMatch);
+    const selectedSeason = document.getElementById('season');
+    const selectedDay = document.getElementById('day');
+    const selectedMatch = document.getElementById('match');
+    loadLeaderboard(selectedSeason.value, selectedDay.value, selectedMatch.value);
     const searchText = document.getElementById('search_txt').value.toLowerCase();
     if (searchText != '') {
         searchLeaderboard();
-    } 
+    }
+
+    if (selectedSeason.value != "") selectedSeason.classList.add("dropdown-filter");
+        else selectedSeason.classList.remove("dropdown-filter");
+    if (selectedDay.value != "") selectedDay.classList.add("dropdown-filter");
+        else selectedDay.classList.remove("dropdown-filter");
+    if (selectedMatch.value != "") selectedMatch.classList.add("dropdown-filter");
+        else selectedMatch.classList.remove("dropdown-filter");
 }
 
 function loadLeaderboard(season, day = '', matchNo = '') {
@@ -22,6 +29,7 @@ function loadLeaderboard(season, day = '', matchNo = '') {
         MainTableData = leaderboard;
         filteredData = MainTableData;
         displayTableData();
+        showToast("LeaderBoard Refreshed!!");
     });
 }
 
@@ -67,7 +75,7 @@ function displayTableData() {
     paginatedData.forEach(item => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${getRank(rank++)}</td>
+            <td>${getRank(item.rank)}</td>
             <td>${item.player_no}</td>
             <td>${item.player_id}</td>
             <td>${item.player_in_game_name}</td>
@@ -75,6 +83,9 @@ function displayTableData() {
             <td>${item.total_assists}</td>
             <td>${item.total_revives}</td>
         `;
+        if(item.player_id == '') {
+            row.classList.add("unregistered");
+        }
         tbody.appendChild(row);
     });
     displayPagination();

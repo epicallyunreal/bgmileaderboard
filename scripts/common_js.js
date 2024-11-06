@@ -18,11 +18,14 @@ function fetchSeasons() {
     fetchDays('');
 }
 
-document.getElementById('season').addEventListener('change', function() {
-    const selectedSeason = this.value;
-    fetchDays(selectedSeason);
-    fetchMatches(selectedSeason, '');
-});
+const seasonElement = document.getElementById('season');
+if (seasonElement) {
+    seasonElement.addEventListener('change', function() {
+        const selectedSeason = this.value;
+        fetchDays(selectedSeason);
+        fetchMatches(selectedSeason, '');
+    });
+}
 
 function fetchDays(season) {
     Common_Day(season)
@@ -40,11 +43,14 @@ function fetchDays(season) {
     fetchMatches(season, '');
 }
 
-document.getElementById('day').addEventListener('change', function() {
-    const selectedDay = this.value;
-    const selectedSeason = document.getElementById('season').value;
-    fetchMatches(selectedSeason, selectedDay);
-});
+const dayElement = document.getElementById('day');
+if (dayElement) {
+    day.addEventListener('change', function() {
+        const selectedDay = this.value;
+        const selectedSeason = document.getElementById('season').value;
+        fetchMatches(selectedSeason, selectedDay);
+    });
+}
 
 function fetchMatches(season, day) {
     Common_Matches(season, day)
@@ -89,11 +95,33 @@ function displayPagination() {
     prevButton.disabled = currentPage === 1; // Disable if on the first page
     paginationContainer.appendChild(prevButton);
     
-    for (let i = 1; i <= totalPages; i++) {
-        const pageButton = document.createElement('button');
-        pageButton.textContent = i;
-        pageButton.onclick = () => goToPage(i); // Set up button click to go to the page
-        paginationContainer.appendChild(pageButton);
+    // for (let i = 1; i <= totalPages; i++) {
+    //     const pageButton = document.createElement('button');
+    //     pageButton.textContent = i;
+    //     pageButton.onclick = () => goToPage(i); // Set up button click to go to the page
+    //     paginationContainer.appendChild(pageButton);
+    // }
+
+    for (let i=1; i<=totalPages; i++) {
+        if (i < currentPage) {
+            if(i==currentPage-3){
+                paginationContainer.appendChild(createPaginationButton(i, "...", ''));
+            }
+            if(i==currentPage-2 || i==currentPage-1){
+                paginationContainer.appendChild(createPaginationButton(i, i, ''));
+            }
+        }
+        else if (i > currentPage) {
+            if(i==currentPage+3){
+                paginationContainer.appendChild(createPaginationButton(i, "...", ''));
+            }
+            if(i==currentPage+2 || i==currentPage+1){
+                paginationContainer.appendChild(createPaginationButton(i, i, ''));
+            }
+        }
+        else {
+            paginationContainer.appendChild(createPaginationButton(i, i, 'active'));
+        }
     }
 
     // Create Next button
@@ -110,6 +138,15 @@ function displayPagination() {
     lastPage.disabled = currentPage === totalPages; // Disable if on the last page
     paginationContainer.appendChild(lastPage);
 }
+function createPaginationButton(pageNo, txt, cssClass) {
+    const pageButton = document.createElement('button');
+    pageButton.textContent = txt;
+    if (cssClass !='') {
+    pageButton.classList.add(cssClass);
+    }
+    pageButton.onclick = () => goToPage(pageNo);
+    return pageButton;
+}
 
 function goToPage(page) {
     currentPage = page; // Update current page
@@ -121,4 +158,15 @@ function setResultsPerPage() {
     resultsPerPage = parseInt(document.getElementById('resultsPerPage').value); // Get user-selected page size
     currentPage = 1; // Reset to the first page
     displayTableData(); // Refetch data with new page size
+}
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    
+    // Hide the toast after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
 }
