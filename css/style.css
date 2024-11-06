@@ -538,21 +538,26 @@ tr {
     visibility: hidden;
     min-width: 250px;
     margin: 0 auto;
-    background-color: #333;
-    color: #fff;
+    background-color: #a4d4ae; /* Softer green tone */
+    color: #333;
     text-align: center;
     padding: 16px;
     position: fixed;
-    z-index: 1;
-    bottom: 30px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%) scale(0.8); /* Start slightly scaled down */
     border-radius: 5px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.5s ease, transform 0.3s ease; /* Smooth scale and fade */
+    opacity: 0; /* Start hidden */
 }
 
 .toast.show {
     visibility: visible;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    opacity: 1; /* Fade in */
+    transform: translate(-50%, -50%) scale(1); /* Expand to normal size */
+    transition: opacity 0.5s ease 0.5s, transform 0.3s ease; /* Delayed fade out */
 }
 
 @keyframes fadein {

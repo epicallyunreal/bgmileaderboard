@@ -39,40 +39,34 @@ function loadData() {
 
     if (tmpPlayersData && tmpPlayersData != 'undefined' && tmpPlayersData != '{}' && PD_VERSION == tmpPDversion) {
         playersData = JSON.parse(tmpPlayersData);
-        console.log("Data loaded from localStorage:", playersData);
     } else {
         loadFromFile(p2fPlayersData).then(data =>{
            // Store data in localStorage and in global variable
             localStorage.setItem('playersData', JSON.stringify(data));
             localStorage.setItem('pd_version', PD_VERSION);
             playersData = data;
-            console.log("Data fetched and stored in localStorage:", playersData); 
         });
     }
 
     if (tmpMatchData && tmpMatchData != 'undefined' && tmpMatchData != '{}' && MD_VERSION == tmpMDversion) {
         matchData = JSON.parse(tmpMatchData);
-        console.log("Data loaded from localStorage:", matchData);
     } else {
         loadFromFile(p2fMatchData).then(data =>{
             // Store data in localStorage and in global variable
             localStorage.setItem('matchData', JSON.stringify(data));
             localStorage.setItem('md_version', MD_VERSION);
             matchData = data;
-            console.log("Data fetched and stored in localStorage:", matchData);
         });
     }
 
     if (tmpPlayerGameData && tmpPlayerGameData != 'undefined' && tmpPlayerGameData != '{}' && PGD_VERSION == tmpPGDversion) {
         playerGameData = JSON.parse(tmpPlayerGameData);
-        console.log("Data loaded from localStorage:", playerGameData);
     } else {
         loadFromFile(p2fPlayerGameData).then(data =>{
             // Store data in localStorage and in global variable
             localStorage.setItem('playerGameData', JSON.stringify(data));
             localStorage.setItem('pgd_version', PGD_VERSION);
             playerGameData = data;
-            console.log("Data fetched and stored in localStorage:", playerGameData); 
         });
     }
 }
