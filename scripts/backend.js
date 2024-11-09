@@ -227,7 +227,7 @@ function MatchData_Refresh(season, day, match_no) {
     // );
     return Promise.resolve({
         ok: true,
-        json: () => Promise.resolve(result),
+        json: () => Promise.resolve(finalData),
     });
 }
 
