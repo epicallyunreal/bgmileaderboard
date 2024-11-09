@@ -4,9 +4,9 @@ const p2fMatchData = '../data/matchdata.json';
 const p2fPlayerGameData = '../data/playergamedata.json';
 
 // Update on FIle Updtes
-const PD_VERSION = '1.1';
-const MD_VERSION = '1.1';
-const PGD_VERSION = '1.1';
+const PD_VERSION = '1.2';
+const MD_VERSION = '1.2';
+const PGD_VERSION = '1.2';
 
 // global vars
 let playersData = [];
