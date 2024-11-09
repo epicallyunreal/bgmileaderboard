@@ -222,9 +222,9 @@ function MatchData_Refresh(season, day, match_no) {
         });
     
     // Filter out players with total sums of finishes, assists, and revives equal to zero
-    const result = finalData.filter(player =>
-        player.finishes > 0 || player.assists > 0 || player.revives > 0
-    );
+    // const result = finalData.filter(player =>
+    //     player.finishes > 0 || player.assists > 0 || player.revives > 0
+    // );
     return Promise.resolve({
         ok: true,
         json: () => Promise.resolve(result),
