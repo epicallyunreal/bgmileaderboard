@@ -586,3 +586,28 @@ tr {
     height: 100vh;
     background-color: transparent;
 } */
+
+.marquee {
+    width: 100%; 
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgb(64, 64, 45);
+    color: red;
+    font-size: 20px;
+    overflow: hidden; 
+    white-space: nowrap; 
+    box-sizing: border-box;
+}
+
+.marquee p {
+    display: inline-block;
+    animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}

@@ -170,3 +170,19 @@ function showToast(message) {
         toast.classList.remove("show");
     }, 3000);
 }
+
+function showRestrictedStatus(match) {
+    var returnStr = match;
+    if (RestrictedMatches.includes(match)) {
+        returnStr += " &#128680";
+    }
+    return returnStr;
+}
+
+function showBannedStatus(player) {
+    var returnStr = player;
+    if (RestrictedPlayers.includes(player)) {
+        returnStr += " &#128683;";
+    }
+    return returnStr;
+}

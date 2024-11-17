@@ -82,7 +82,7 @@ function displayTableData() {
     paginatedData.forEach(item => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${item.player_no}</td>
+            <td>${showBannedStatus(item.player_no)}</td>
             <td>${item.player_id}</td>
             <td>${item.player_in_game_name}</td>
         `;

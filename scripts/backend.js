@@ -4,14 +4,19 @@ const p2fMatchData = '../data/matchdata.json';
 const p2fPlayerGameData = '../data/playergamedata.json';
 
 // Update on FIle Updtes
-const PD_VERSION = '1.2';
-const MD_VERSION = '1.2';
-const PGD_VERSION = '1.2';
+const PD_VERSION = '1.3';
+const MD_VERSION = '1.3';
+const PGD_VERSION = '1.3';
 
 // global vars
 let playersData = [];
 let matchData = []; 
 let playerGameData = []; 
+
+// Restricted Data
+const RestrictedMatches = [11, 12, 13];
+const RestrictedPlayers = [43];
+
 
 async function loadFromFile(path) {
     // If data not in localStorage, fetch from API
@@ -143,7 +148,8 @@ function Leaderboard_Refresh(season, day, match_no) {
         const seasonMatches = !season || match.season == season;
         const dayMatches = !day || match.day == day;
         const matchNoMatches = !match_no || match.match_no == match_no;
-        return seasonMatches && dayMatches && matchNoMatches;
+        const notInRestricted = !RestrictedMatches.includes(match.match_no);
+        return seasonMatches && dayMatches && matchNoMatches && notInRestricted;
     }).map(match => match.match_no); // Get only the matching match numbers
 
     const leaderboard = playersData.map(player => {
