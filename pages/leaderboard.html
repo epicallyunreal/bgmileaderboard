@@ -13,7 +13,7 @@
     <script>
         function launchConfetti() {
             confetti({
-                particleCount: 500,
+                particleCount: 1000,
                 spread: 360,
                 origin: { y: 0.5 }
             });
@@ -27,14 +27,14 @@
 
             (function frame() {
                 confetti({
-                    particleCount: 7,
+                    particleCount: 10,
                     angle: 60,
                     spread: 80,
                     origin: { x: 0.0 },
                     colors: colors
                 });
                 confetti({
-                    particleCount: 7,
+                    particleCount: 10,
                     angle: 120,
                     spread: 80,
                     origin: { x: 1 },
@@ -46,10 +46,6 @@
                 }
             }());
         }
-        document.addEventListener('DOMContentLoaded', (event) => {
-            partyAnimation();
-            launchConfetti();
-        });
     </script>
     <script src="../scripts/backend.js"></script>
 </head>
@@ -121,6 +117,10 @@
 
     <div class="marquee">
         <p>NOTE : Leaderboard is currently not calculating data for <b>Matches 11, 12 & 13, held on 16/11/2024 (S1) as they are in REVIEW</b>. Though you can see the Match Data & Player info in respective Tabs.</p>
+    </div>
+
+    <div id="loadingSpinner" class="loading-spinner">
+        🔄
     </div>
 
     <h2>Player Leaderboard</h2>

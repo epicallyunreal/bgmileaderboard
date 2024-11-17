@@ -611,3 +611,27 @@ tr {
         transform: translateX(-100%);
     }
 }
+
+/* Spinner styling */
+.loading-spinner {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 3em;
+    color: #00ffcc;
+    transform-origin: center center;
+    animation: rotate 1s linear infinite;
+}
+
+/* Animation for the loading spinner */
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

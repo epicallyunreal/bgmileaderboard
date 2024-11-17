@@ -1,8 +1,24 @@
 // Fetch leaderboard data on page load
 window.onload = function() {
     fetchSeasons();
-    RefreshLeaderboard();
+    showLoadingAndRefresh();
 };
+
+function showLoadingAndRefresh() {
+    if (playersData && playersData != 'undefined' && playersData != '{}') {
+        RefreshLeaderboard();
+    }
+    else {
+        // Show the loading spinner
+        const loadingSpinner = document.getElementById("loadingSpinner");
+
+        loadingSpinner.style.display = "block";
+        setTimeout(() => {
+            loadingSpinner.style.display = "none";
+            RefreshLeaderboard();
+        }, 3000);
+    }
+}
 
 function RefreshLeaderboard() {
     const selectedSeason = document.getElementById('season');
@@ -20,6 +36,10 @@ function RefreshLeaderboard() {
         else selectedDay.classList.remove("dropdown-filter");
     if (selectedMatch.value != "") selectedMatch.classList.add("dropdown-filter");
         else selectedMatch.classList.remove("dropdown-filter");
+    
+    
+    partyAnimation();
+    launchConfetti();
 }
 
 function loadLeaderboard(season, day = '', matchNo = '') {
