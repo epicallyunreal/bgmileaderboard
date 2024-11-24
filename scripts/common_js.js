@@ -186,3 +186,42 @@ function showBannedStatus(player) {
     }
     return returnStr;
 }
+
+// // Notification area
+// function populateNotifications() {
+//     const container = document.getElementById("notifications-container");
+//     container.innerHTML = ""; // Clear existing notifications
+//     notificationsData.forEach((notification) => {
+//       const notificationElem = document.createElement("div");
+//       notificationElem.classList.add("notification");
+//       notificationElem.innerHTML = `
+//         <div class="date">${notification.date}</div>
+//         <div class="header">${notification.header}</div>
+//         <div class="body">${notification.body}</div>
+//       `;
+//       container.appendChild(notificationElem);
+//     });
+//   }
+  
+//   // Open and close modal functionality
+//   const notificationsBtn = document.getElementById("notifications-btn");
+//   const notificationsModal = document.getElementById("notifications-modal");
+//   const closeModal = document.getElementById("close-modal");
+  
+//   notificationsBtn.addEventListener("click", () => {
+//     fetchNotifications(); // Populate notifications when modal opens
+//     notificationsModal.classList.add("show");  // Add 'show' class to make the modal visible
+//     notificationsModal.style.display = "block";
+//   });
+  
+//   closeModal.addEventListener("click", () => {
+//     notificationsModal.classList.remove("show");  // Remove 'show' class to hide modal
+//     notificationsModal.style.display = "none";
+//   });
+  
+//   window.addEventListener("click", (event) => {
+//     if (event.target === notificationsModal) {
+//       notificationsModal.classList.remove("show");  // Remove 'show' class to hide modal
+//       notificationsModal.style.display = "none";
+//     }
+//   });

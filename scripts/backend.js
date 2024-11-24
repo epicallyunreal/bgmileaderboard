@@ -4,9 +4,9 @@ const p2fMatchData = '../data/matchdata.json';
 const p2fPlayerGameData = '../data/playergamedata.json';
 
 // Update on FIle Updtes
-const PD_VERSION = '1.3';
-const MD_VERSION = '1.3';
-const PGD_VERSION = '1.3';
+const PD_VERSION = '1.4';
+const MD_VERSION = '1.4';
+const PGD_VERSION = '1.4';
 
 // global vars
 let playersData = [];
@@ -242,4 +242,16 @@ function PlayerData_Refresh() {
         ok: true,
         json: () => Promise.resolve(playersData),
     });
+}
+
+
+// Notifications 
+
+let notificationsData = [];
+async function fetchNotifications() {
+    const response = await fetch("../data/notifications.json");
+    const data = await response.json();
+    notificationsData.length = 0; // Clear existing data
+    notificationsData.push(...data); // Update with new data
+    populateNotifications();
 }

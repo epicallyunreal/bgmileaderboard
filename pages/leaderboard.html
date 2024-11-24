@@ -69,6 +69,7 @@
             <a href="./matchdata.html">Match Data</a>
             <a href="./players.html">Players</a>
             <a href="./fill_form.html">Form</a>
+            <!-- <button id="notifications-btn">🔔 Notifications</button> -->
             
             <!-- Dropdown for additional links -->
             <!-- <div class="dropdown">
@@ -81,6 +82,19 @@
             </div> -->
         </div>
     </div>
+
+    <!-- <div class="filter_options">
+        <div class="dropdowns">
+            <div class="dropdown">
+                <label for="type">Type:</label>
+                <select id="type" name="type">
+                    <option value="1" selected>Finish</option>
+                    <option value="2">Assists</option>
+                    <option value="3">Revives</option>
+                </select>
+            </div>
+        </div>
+    </div> -->
 
     <div class="filter_options">
         <div class="search">
@@ -116,7 +130,7 @@
     </div>
 
     <div class="marquee">
-        <p>NOTE : Leaderboard is currently not calculating data for <b>Matches 11, 12 & 13, held on 16/11/2024 (S1) as they are in REVIEW</b>. Though you can see the Match Data & Player info in respective Tabs.</p>
+        <p>NOTE : Leaderboard is not calculating data for <b>Matches 11, 12 & 13, held on 16/11/2024 (S1) as these matches are Restricted</b>. Though you can see the Match Data & Player info in respective Tabs.</p>
     </div>
 
     <div id="loadingSpinner" class="loading-spinner">
@@ -161,6 +175,16 @@
 
     <div id="toast" class="toast"></div>
     <!-- <div id="fireworks-container"></div> -->
+
+    <!-- Modal for Notifications -->
+    <!-- <div id="notifications-modal" class="modal-overlay">
+        <div class="modal-content">
+          <span id="close-modal" class="close-btn">&times;</span>
+          <div class="modal-title">Notifications</div>
+          <div id="notifications-container" class="notifications-container">
+          </div>
+        </div>
+    </div> -->
 
     <span id="note">
         <b>Players marked in Red are not registered yet!!</b>

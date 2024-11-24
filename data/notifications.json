@@ -1,0 +1,17 @@
+[
+    {
+      "date": "2024-11-24 10:30 AM",
+      "header": "System Update",
+      "body": "The system will undergo maintenance from 12:00 AM to 4:00 AM tonight."
+    },
+    {
+      "date": "2024-11-23 6:15 PM",
+      "header": "New Feature",
+      "body": "Check out the new leaderboard system in your profile!"
+    },
+    {
+      "date": "2024-11-22 2:45 PM",
+      "header": "Match Reminder",
+      "body": "Your next scheduled BGMI match starts in 15 minutes."
+    }
+  ]
