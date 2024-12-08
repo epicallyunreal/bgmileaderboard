@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
     <script src="./scripts/backend.js"></script>
 </head>
 <body>
@@ -41,6 +42,63 @@
         </div>
     </div>
 
+    <h1>Reveal the Surprises!</h1>
+    <div class="reveal-grid">
+        <img src="./images/Champ_Reveal.png" width="100%" height="auto">
+        <div id="mfp_1" class="reveal-item">
+          <button class="reveal-button quesMark" data-image="./images/winners/Tx4PIYUSH.jpeg"></button>
+          <div class="info-text">38 Finishes</div>
+        </div>
+        <div id="mfp_2" class="reveal-item">
+          <button class="reveal-button quesMark" data-image="./images/winners/SpartanXPoison.jpeg"></button>
+          <div class="info-text">28 Finishes</div>
+        </div>
+        <div id="mfp_3" class="reveal-item mfp">
+          <button class="reveal-button quesMark" data-image="./images/winners/Tx4aditya.jpeg"></button>
+          <div class="info-text">18 Finishes</div>
+        </div>
+        <div id="mfp_4" class="reveal-item mfp">
+          <button class="reveal-button quesMark" data-image="./images/winners/RoGxSKIPPER.jpeg"></button>
+          <div class="info-text">18 Finishes</div>
+        </div>
+        <div id="ap_ma" class="reveal-item ap">
+          <button class="reveal-button quesMark" data-image="./images/winners/RoGxBUGWAA.jpeg"></button>
+          <div class="info-text">8 Assists</div>
+        </div>
+        <div id="ap_mr" class="reveal-item ap">
+          <button class="reveal-button quesMark" data-image="./images/winners/RoGxBUGWAA.jpeg"></button>
+          <div class="info-text">5 Revives</div>
+        </div>
+        <div id="ap_mf_1" class="reveal-item ap">
+          <button class="reveal-button quesMark" data-image="./images/winners/Tx4PIYUSH.jpeg"></button>
+          <div class="info-text">5 Finishes</div>
+        </div>
+        <div id="ap_mf_2" class="reveal-item ap">
+          <button class="reveal-button quesMark" data-image="./images/winners/SpartanXPoison.jpeg"></button>
+          <div class="info-text">5 Finishes</div>
+        </div>
+        <div id="wk_1" class="reveal-item wk">
+          <button class="reveal-button quesMark" data-image="./images/winners/Tx4PIYUSH.jpeg"></button>
+          <div class="info-text">9 Finishes</div>
+        </div>
+        <div id="wk_2" class="reveal-item wk">
+          <button class="reveal-button quesMark" data-image="./images/winners/RoGxSKIPPER.jpeg"></button>
+          <div class="info-text">5 Finishes</div>
+        </div>
+        <div id="wk_3" class="reveal-item wk">
+          <button class="reveal-button quesMark" data-image="./images/winners/Tx4PIYUSH.jpeg"></button>
+          <div class="info-text">13 Finishes</div>
+        </div>
+        <div id="wk_4" class="reveal-item wk">
+          <button class="reveal-button quesMark" data-image="./images/winners/SpartanXPoison.jpeg"></button>
+          <div class="info-text">17 Finishes</div>
+        </div>
+        <div id="wk_5" class="reveal-item wk">
+          <button class="reveal-button quesMark" data-image="./images/winners/SpartanXPoison.jpeg"></button>
+          <div class="info-text">7 Finishes</div>
+        </div>
+    </div>
+    <canvas id="confetti-canvas"></canvas><br><br>
     <div>
         <img src="./images/Prize_Leaderoard_Poster.png" width="100%" height="100%">
     </div>
@@ -48,10 +106,10 @@
     <footer class="footer">
         <p>&copy; 2024 RoGxUNREALyt. All Rights Reserved.</p>
         <div class="social-links">
-            <a href="https://www.youtube.com/@RoGxUNREALyt" target="_blank">
+            <a href="https://www.youtube.com/@RoGxUNREAL" target="_blank">
                 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube">
             </a>
-            <a href="https://www.instagram.com/rogxunreal_yt" target="_blank">
+            <a href="https://www.instagram.com/ig_rogxunreal" target="_blank">
                 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram">
             </a>
             <a href="https://www.facebook.com/share/wqst5CNqfuHqnaR9/" target="_blank">
@@ -64,7 +122,42 @@
     </footer>
 
     <script>
+       const startConfetti = () => {
+        const confettiSettings = { target: 'confetti-canvas', max: 3000 };
+        const confetti = new ConfettiGenerator(confettiSettings);
+        confetti.render();
+
+        // Stop confetti after 2 seconds
+        setTimeout(() => confetti.clear(), 2000);
+        };
+
+        // Reveal Functionality
+        document.querySelectorAll('.reveal-button').forEach(button => {
+            button.addEventListener('click', () => {
+                // Prevent double reveal
+                if (button.classList.contains('revealed')) return;
+
+                // Add spinning animation
+                button.classList.add('revealing');
+
+                // Simulate loading (e.g., API delay or visual effect)
+                setTimeout(() => {
+                const imageUrl = button.getAttribute('data-image');
+
+                // Replace button content with the actual image
+                button.innerHTML = `<img src="${imageUrl}" alt="Revealed Image">`;
+
+                // Change button style to match revealed state
+                button.classList.remove('quesMark');
+                button.classList.remove('revealing');
+                button.classList.add('revealed');
+
+                // Trigger confetti effect
+                startConfetti();
+                }, 500); // 1 second delay
+            });
+        });
     </script>
-    <script src="./scripts/script.js"></script>
+    <script src="./scripts/common_js.js"></script>
 </body>
 </html>

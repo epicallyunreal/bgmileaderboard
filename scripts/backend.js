@@ -4,9 +4,9 @@ const p2fMatchData = '../data/matchdata.json';
 const p2fPlayerGameData = '../data/playergamedata.json';
 
 // Update on FIle Updtes
-const PD_VERSION = '1.4';
-const MD_VERSION = '1.4';
-const PGD_VERSION = '1.4';
+const PD_VERSION = '1.5';
+const MD_VERSION = '1.5';
+const PGD_VERSION = '1.5';
 
 // global vars
 let playersData = [];
@@ -142,7 +142,7 @@ function Common_Matches(selectedSeason, selectedDay) {
 }
 
 // LeaderBoard
-function Leaderboard_Refresh(season, day, match_no) {
+function Leaderboard_Refresh(season, day, match_no, lb_type) {
     // First, filter the match data based on the season and day
     const filteredMatches = matchData.filter(match => {
         const seasonMatches = !season || match.season == season;
@@ -162,6 +162,17 @@ function Leaderboard_Refresh(season, day, match_no) {
         const totalAssists = relevantGameData.reduce((sum, data) => sum + data.assists, 0);
         const totalRevives = relevantGameData.reduce((sum, data) => sum + data.revives, 0);
 
+        // Calculate the highest finish specifically for this player
+        let highestFinish = 0;
+        let highestFinishMatchID = null;
+
+        relevantGameData.forEach(data => {
+            if (data.finishes > highestFinish) {
+                highestFinish = data.finishes; // Player's personal highest finish
+                highestFinishMatchID = data.match_no; // Match ID for the player's highest finish
+            }
+        });
+
         if (relevantGameData.length > 0) {
             return {
                 player_no: player.player_no,
@@ -170,7 +181,9 @@ function Leaderboard_Refresh(season, day, match_no) {
                 total_finishes: totalFinishes,
                 total_assists: totalAssists,
                 total_revives: totalRevives,
-                match_no: relevantGameData.map(data => data.match_no)
+                match_no: relevantGameData.map(data => data.match_no),
+                highest_finish: highestFinish,
+                highest_finish_match_id: highestFinishMatchID
             };
         }
     });
@@ -179,13 +192,46 @@ function Leaderboard_Refresh(season, day, match_no) {
 
     // Sort by total finishes in descending order and limit to 500
     const sortedLeaderboard = filteredLeaderboard.sort((a, b) => {
+        let primaryFieldA, primaryFieldB;
+    
+        // Determine the primary field based on lb_type
+        switch (lb_type) {
+            case "1": // Most Finishes
+                primaryFieldA = a.total_finishes;
+                primaryFieldB = b.total_finishes;
+                break;
+            case "2": // Most Assists
+                primaryFieldA = a.total_assists;
+                primaryFieldB = b.total_assists;
+                break;
+            case "3": // Most Revives
+                primaryFieldA = a.total_revives;
+                primaryFieldB = b.total_revives;
+                break;
+            case "4": // Highest Finish in a Single Match
+                primaryFieldA = a.highest_finish;
+                primaryFieldB = b.highest_finish;
+                break;
+            default:
+                throw new Error("Invalid lb_type specified");
+        }
+    
+        // Apply primary sort based on lb_type
+        if (primaryFieldB !== primaryFieldA) {
+            return primaryFieldB - primaryFieldA; // Descending order
+        }
+    
+        // Apply secondary sort for tie-breaking
         if (b.total_finishes !== a.total_finishes) {
             return b.total_finishes - a.total_finishes;
         }
         if (b.total_assists !== a.total_assists) {
             return b.total_assists - a.total_assists;
         }
-        return b.total_revives - a.total_revives;
+        if (b.total_revives !== a.total_revives) {
+            return b.total_revives - a.total_revives;
+        }
+        return b.highest_finish - a.highest_finish;
     }).slice(0, 500);
 
     sortedLeaderboard.forEach((player, index) => {

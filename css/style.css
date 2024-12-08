@@ -12,6 +12,7 @@ body {
     color: #cfd2d6;        
     padding-left: 40px;
     padding-right: 40px;
+    max-width: 1920px;
 }
 
 .match_data {
@@ -453,6 +454,11 @@ input[type="text"]:focus, input[type="number"]:focus, select:focus {
     }
 }
 
+.highlight {
+    background-color: rgba(255, 215, 0, 0.8);
+    color: #282828;
+}
+
 .unregistered {
     background-color: #8d4545 !important;
 }
@@ -562,6 +568,285 @@ input[type="text"]:focus, input[type="number"]:focus, select:focus {
         transform: rotate(360deg);
     }
 }
+
+#leaderboard_filter {
+    width: 600px;
+    justify-content: center;
+    margin: 16px auto;
+    box-shadow: 0 2px 10px rgba(256, 196, 196, 0.9);
+}
+
+/* Reveal images CSS */
+
+.reveal-grid {
+  position: relative;
+  gap: 20px;
+  width: 100%;
+  height: auto;
+}
+
+.reveal-button {
+  width: 100%;
+  height: 100%;
+  border: 2px dashed #888;
+  background-color: #ccc;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  transition: transform 0.6s ease;
+}
+
+.reveal-button.revealing {
+  transform: rotate(360deg);
+}
+
+.reveal-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  display: none;
+}
+
+.quesMark::before {
+    content: "?"; /* Add the question mark */
+    font-size: calc(2vw + 2vh); /* Slightly larger for visibility */
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    line-height: 1;
+    background: linear-gradient(135deg, #3d0f22, #ff758c); /* Gradient for a modern look */
+    -webkit-background-clip: text; /* Clip gradient to text */
+    -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for pop-out effect */
+    border: 3px solid #4b0712; /* Border to match gradient */
+    border-radius: 50%; /* Circular appearance */
+    padding: 10px 20px; /* Add some padding */
+    display: inline-block;
+    width: auto;
+    height: auto;
+    transition: opacity 0.5s ease, transform 0.3s ease;
+    transform: scale(1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Add depth */
+}
+
+.reveal-button:hover.quesMark::before {
+    transform: scale(1.1); /* Slight pop-out on hover */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); /* Enhance hover depth */
+}
+
+/* Winner - Golden Hue */
+#mfp_1 .reveal-button.revealed {
+    border: 4px solid #ffc107; /* Golden border */
+    background: radial-gradient(circle, rgba(255,224,130,1) 0%, rgba(255,193,7,1) 100%);
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(255, 193, 7, 0.6), 0px 0px 20px rgba(255, 193, 7, 0.8);
+    animation: border-pulse-gold 1.5s infinite ease-in-out;
+}
+
+/* First Runner-Up - Silver Hue */
+#mfp_2 .reveal-button.revealed {
+    border: 4px solid #c0c0c0; /* Silver border */
+    background: radial-gradient(circle, rgba(224,224,224,1) 0%, rgba(192,192,192,1) 100%);
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(192, 192, 192, 0.6), 0px 0px 20px rgba(224, 224, 224, 0.8);
+    animation: border-pulse-silver 1.5s infinite ease-in-out;
+}
+
+/* Second Runner-Up - Bronze Hue */
+.mfp .reveal-button.revealed {
+    border: 4px solid #cd7f32; /* Bronze border */
+    background: radial-gradient(circle, rgba(237,145,33,1) 0%, rgba(205,127,50,1) 100%);
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(205, 127, 50, 0.6), 0px 0px 20px rgba(237, 145, 33, 0.8);
+    animation: border-pulse-bronze 1.5s infinite ease-in-out;
+}
+
+/* Additional Prizes - Brownish-Orange Hue */
+.ap .reveal-button.revealed {
+    border: 4px solid #d2691e; /* Brownish-orange border */
+    background: radial-gradient(circle, rgba(210,105,30,1) 0%, rgba(160,82,45,1) 100%);
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(210, 105, 30, 0.6), 0px 0px 20px rgba(160, 82, 45, 0.8);
+    animation: border-pulse-brownish 1.5s infinite ease-in-out;
+}
+
+/* Weekly Prizes - Blue Hue */
+.wk .reveal-button.revealed {
+    border: 4px solid #1e90ff; /* Blue border */
+    background: radial-gradient(circle, rgba(135,206,250,1) 0%, rgba(30,144,255,1) 100%);
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(30, 144, 255, 0.6), 0px 0px 20px rgba(135, 206, 250, 0.8);
+    animation: border-pulse-blue 1.5s infinite ease-in-out;
+}
+
+/* Animations */
+@keyframes border-pulse-gold {
+    0%, 100% { box-shadow: 0px 4px 12px rgba(255, 193, 7, 0.6), 0px 0px 20px rgba(255, 193, 7, 0.8); }
+    50% { box-shadow: 0px 6px 16px rgba(255, 193, 7, 0.8), 0px 0px 25px rgba(255, 224, 130, 1); }
+}
+
+@keyframes border-pulse-silver {
+    0%, 100% { box-shadow: 0px 4px 12px rgba(192, 192, 192, 0.6), 0px 0px 20px rgba(224, 224, 224, 0.8); }
+    50% { box-shadow: 0px 6px 16px rgba(224, 224, 224, 0.8), 0px 0px 25px rgba(192, 192, 192, 1); }
+}
+
+@keyframes border-pulse-bronze {
+    0%, 100% { box-shadow: 0px 4px 12px rgba(205, 127, 50, 0.6), 0px 0px 20px rgba(237, 145, 33, 0.8); }
+    50% { box-shadow: 0px 6px 16px rgba(237, 145, 33, 0.8), 0px 0px 25px rgba(205, 127, 50, 1); }
+}
+
+@keyframes border-pulse-brownish {
+    0%, 100% { box-shadow: 0px 4px 12px rgba(210, 105, 30, 0.6), 0px 0px 20px rgba(160, 82, 45, 0.8); }
+    50% { box-shadow: 0px 6px 16px rgba(210, 105, 30, 0.8), 0px 0px 25px rgba(160, 82, 45, 1); }
+}
+
+@keyframes border-pulse-blue {
+    0%, 100% { box-shadow: 0px 4px 12px rgba(30, 144, 255, 0.6), 0px 0px 20px rgba(135, 206, 250, 0.8); }
+    50% { box-shadow: 0px 6px 16px rgba(135, 206, 250, 0.8), 0px 0px 25px rgba(30, 144, 255, 1); }
+}
+
+/* Style for always visible information */
+.info-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Darker background for better visibility */
+    color: white; /* Bright white text for high contrast */
+    padding: 5px;
+    text-align: center;
+    font-size: calc(0.5vw + 0.5vh); /* Responsive font size */
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Adds a subtle border shadow for depth */
+    z-index: 10; /* Ensure it stays above the button */
+}
+
+#mfp_1 .info-text { 
+    border: 2px solid #FFD700; /* Golden border for emphasis */
+}
+#mfp_2 .info-text { 
+    border: 2px solid #C0C0C0; /* Silver border for emphasis */
+}
+.mfp .info-text { 
+    border: 2px solid #CD7F32; /* Bronze border for emphasis */
+}
+.ap .info-text { 
+    border: 2px solid #8B4513; /* Brownish Orange border for emphasis */
+}
+.wk .info-text { 
+    border: 2px solid #FFA500; /* Blueish border for emphasis */
+}
+
+
+.reveal-button.revealed img {
+  display: block;
+}
+
+/* Confetti Styling */
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.reveal-item {
+  position: absolute;
+}
+
+#mfp_1 {
+    top: 49%;
+    left: 44%;
+    width: 10.5%;
+    height: 18.6%;
+}
+#mfp_2 {
+    top: 53%;
+    left: 32%;
+    width: 9.4%;
+    height: 16.7%;
+}
+#mfp_3 {
+    top: 58.3%;
+    left: 54.8%;
+    width: 7.9%;
+    height: 13.9%;
+}
+#mfp_4 {
+    top: 58.3%;
+    left: 62.8%;
+    width: 7.9%;
+    height: 13.9%;
+}
+
+#ap_ma {
+    top: 51.5%;
+    left: 4.5%;
+    width: 9.4%;
+    height: 16.7%;
+}
+#ap_mr {
+    top: 51.5%;
+    left: 16%;
+    width: 9.4%;
+    height: 16.7%;
+}
+#ap_mf_1 {
+    top: 73.2%;
+    left: 6.8%;
+    width: 7.9%;
+    height: 13.9%;
+}
+#ap_mf_2 {
+    top: 73.2%;
+    left: 14.5%;
+    width: 7.9%;
+    height: 13.9%;
+}
+
+#wk_1 {
+    top: 50.2%;
+    left: 71.7%;
+    width: 8.4%;
+    height: 14.9%;
+}
+#wk_2 {
+    top: 50.2%;
+    left: 80.5%;
+    width: 8.4%;
+    height: 14.9%;
+}
+#wk_3 {
+    top: 50.2%;
+    left: 89.5%;
+    width: 8.4%;
+    height: 14.9%;
+}
+#wk_4 {
+    top: 67%;
+    left: 76.8%;
+    width: 8.4%;
+    height: 14.9%;
+}
+#wk_5 {
+    top: 67%;
+    left: 85.4%;
+    width: 8.4%;
+    height: 14.9%;
+}
+
+
 /* 
 .modal-overlay {
     display: none; 

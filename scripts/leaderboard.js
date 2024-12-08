@@ -24,7 +24,8 @@ function RefreshLeaderboard() {
     const selectedSeason = document.getElementById('season');
     const selectedDay = document.getElementById('day');
     const selectedMatch = document.getElementById('match');
-    loadLeaderboard(selectedSeason.value, selectedDay.value, selectedMatch.value);
+    const leaderboardType = document.getElementById('leaderboard_type');
+    loadLeaderboard(selectedSeason.value, selectedDay.value, selectedMatch.value, leaderboardType.value);
     const searchText = document.getElementById('search_txt').value.toLowerCase();
     if (searchText != '') {
         searchLeaderboard();
@@ -36,19 +37,21 @@ function RefreshLeaderboard() {
         else selectedDay.classList.remove("dropdown-filter");
     if (selectedMatch.value != "") selectedMatch.classList.add("dropdown-filter");
         else selectedMatch.classList.remove("dropdown-filter");
-    
+
+    if (leaderboardType.value != "") leaderboardType.classList.add("dropdown-filter");
+    else leaderboardType.classList.remove("dropdown-filter");
     
     partyAnimation();
     launchConfetti();
 }
 
-function loadLeaderboard(season, day = '', matchNo = '') {
-    Leaderboard_Refresh(season, day, matchNo)
+function loadLeaderboard(season, day = '', matchNo = '', lb_type = '1') {
+    Leaderboard_Refresh(season, day, matchNo, lb_type)
     .then(response => response.json())
     .then(leaderboard => {
         MainTableData = leaderboard;
         filteredData = MainTableData;
-        displayTableData();
+        displayTableData(lb_type);
         showToast("LeaderBoard Refreshed!!");
     });
 }
@@ -79,7 +82,7 @@ function searchLeaderboard() {
     }
 }
 
-function displayTableData() {
+function displayTableData(lb_type) {
     const tbody = document.getElementById('leaderboardTable');
     tbody.innerHTML = ''; // Clear existing rows
 
@@ -99,9 +102,10 @@ function displayTableData() {
             <td>${item.player_no}</td>
             <td>${item.player_id}</td>
             <td>${item.player_in_game_name}</td>
-            <td>${item.total_finishes}</td>
-            <td>${item.total_assists}</td>
-            <td>${item.total_revives}</td>
+            <td ${(lb_type == '1') ? ' class="highlight"' : ''}>${item.total_finishes}</td>
+            <td ${(lb_type == '2') ? ' class="highlight"' : ''}>${item.total_assists}</td>
+            <td ${(lb_type == '3') ? ' class="highlight"' : ''}>${item.total_revives}</td>
+            <td ${(lb_type == '4') ? ' class="highlight"' : ''}>${item.highest_finish} (${item.highest_finish_match_id}) </td>
         `;
         if(item.player_id == '') {
             row.classList.add("unregistered");
